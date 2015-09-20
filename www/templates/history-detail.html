@@ -1,0 +1,25 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view view-title="{{history.name}}">
+  <ion-content class="padding">
+    <img ng-src="{{history.face}}" style="width: 64px; height: 64px">
+    <p>
+      {{history.lastText}}
+    </p>
+  </ion-content>
+</ion-view>
+<ion-header-bar class="bar-stable">
+  <h1 class="title">Map</h1>
+</ion-header-bar>
+
+<ion-content scroll="false">
+  <map on-create="mapCreated(map)"></map>
+</ion-content>
+
+<ion-footer-bar class="bar-stable">
+  <a ng-click="centerOnMe()" class="button button-icon icon ion-navigate"></a>
+</ion-footer-bar>
