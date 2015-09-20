@@ -1,4 +1,4 @@
-angular.module('starter.directives', [])
+;angular.module('starter.directives', [])
 
 .directive('map', function() {
   return {
@@ -8,21 +8,22 @@ angular.module('starter.directives', [])
     },
     link: function ($scope, $element, $attr) {
       function initialize() {
-        var myLatlng = new google.maps.LatLng(43.07493,-89.381388);
+        var pathToDraw = [new google.maps.LatLng(37.7598507,-122.38361090000001),new google.maps.LatLng(37.7638507,-122.38761090000001),new google.maps.LatLng(37.7658507,-122.39161090000001),new google.maps.LatLng(37.7668507,-122.39161090000001)];
+        var myLatlng = new google.maps.LatLng(37.7598507,-122.38361090000001);
         var mapOptions = {
           center: myLatlng,
           zoom: 16,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
+          mapTypeId: google.maps.MapTypeId.HYBRID
         };
         var map = new google.maps.Map($element[0], mapOptions);
 
         $scope.onCreate({map: map});
 
-         var marker = new google.maps.Marker({
-           position: myLatlng,
-           map: map,
-           title: 'Uluru (Ayers Rock)'
-         });
+          var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            title: 'Uluru (Ayers Rock)'
+          });
 
         //  google.maps.event.addListener(marker, 'click', function() {
         //    infowindow.open(map,marker);
@@ -33,6 +34,16 @@ angular.module('starter.directives', [])
           e.preventDefault();
           return false;
         });
+
+        //line to be drawn from pathToDraw (line 11)
+        var runPath = new google.maps.Polyline({
+          path: pathToDraw,
+          geodesic: true,
+          strokeColor: '#FF0000',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+        runPath.setMap(map);
       }
 
       if (document.readyState === "complete") {
